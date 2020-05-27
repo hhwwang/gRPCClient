@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewData["Title"] = "TrialLink";
+}
+@model UtilityApplications.Models.TrialLinkModel
+
+<div class="text-center">
+    <p>24PW Trail Link Generator</p>
+</div>
+<div>
+    <form method="post" enctype="multipart/form-data" asp-controller="Home" asp-action="TrialLink">
+        <table>
+            <tr>
+                <td>@Html.DisplayNameFor(model => model.State) </td>
+                <td>@Html.TextBoxFor(model => model.State)</td>
+            </tr>
+            <tr>
+                <td>@Html.DisplayNameFor(model => model.Server) </td>
+                @{
+                    var serverListItems = new List<SelectListItem>();
+                    serverListItems.Add(new SelectListItem("QA", "1"));
+                }
+                <td>@Html.DropDownListFor(model => model.Server, serverListItems) </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Generate" /></td>
+            </tr>
+        </table>
+        @Html.ValidationSummary(true)
+    </form>
+</div>
+<div>
+
+    @if (!string.IsNullOrEmpty(Model.TrialURL))
+    {
+    <span>Trial Links:</span>
+    <br />
+    <span>
+        <a href="@Model.TrialURL" target="_blank">@Model.TrialURL</a>
+    </span>
+    }
+</div>

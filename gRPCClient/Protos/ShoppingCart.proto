@@ -1,0 +1,24 @@
+﻿syntax = "proto3";
+
+import "google/protobuf/wrappers.proto";
+
+service ShoppingCart {
+
+  // api to generate trial link for 24PW
+  rpc InsuranceTrialLinkGet (InsuranceTrialLinkGetRequest) returns (InsuranceTrialLinkGetResponse);
+}
+
+
+message InsuranceTrialLinkGetRequest {
+  string state = 1;
+  int32 server = 2;
+}
+
+
+message InsuranceTrialLinkGetResponse {
+  google.protobuf.BoolValue isValid = 1;
+  string countryCode = 2;
+  string userid = 3;
+  string trialURL = 4;
+  string errorMessage = 5;
+}
